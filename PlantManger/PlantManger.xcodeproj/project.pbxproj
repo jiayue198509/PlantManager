@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		F010AC501E8B63D400458EE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC4F1E8B63D400458EE9 /* AppDelegate.swift */; };
-		F010AC521E8B63D400458EE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC511E8B63D400458EE9 /* ViewController.swift */; };
 		F010AC551E8B63D400458EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F010AC531E8B63D400458EE9 /* Main.storyboard */; };
 		F010AC571E8B63D400458EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F010AC561E8B63D400458EE9 /* Assets.xcassets */; };
 		F010AC5A1E8B63D400458EE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F010AC581E8B63D400458EE9 /* LaunchScreen.storyboard */; };
+		F010AC681E8B64DE00458EE9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC671E8B64DE00458EE9 /* MainViewController.swift */; };
+		F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC691E8B7EFD00458EE9 /* StepperView.swift */; };
+		F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6B1E8B802D00458EE9 /* StepperNode.swift */; };
+		F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F010AC4C1E8B63D400458EE9 /* PlantManger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantManger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F010AC4F1E8B63D400458EE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F010AC511E8B63D400458EE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F010AC541E8B63D400458EE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F010AC561E8B63D400458EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F010AC591E8B63D400458EE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F010AC5B1E8B63D400458EE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F010AC671E8B64DE00458EE9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F010AC691E8B7EFD00458EE9 /* StepperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
+		F010AC6B1E8B802D00458EE9 /* StepperNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperNode.swift; sourceTree = "<group>"; };
+		F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,65 @@
 		F010AC4E1E8B63D400458EE9 /* PlantManger */ = {
 			isa = PBXGroup;
 			children = (
+				F010AC611E8B648D00458EE9 /* classes */,
 				F010AC4F1E8B63D400458EE9 /* AppDelegate.swift */,
-				F010AC511E8B63D400458EE9 /* ViewController.swift */,
 				F010AC531E8B63D400458EE9 /* Main.storyboard */,
 				F010AC561E8B63D400458EE9 /* Assets.xcassets */,
 				F010AC581E8B63D400458EE9 /* LaunchScreen.storyboard */,
 				F010AC5B1E8B63D400458EE9 /* Info.plist */,
 			);
 			path = PlantManger;
+			sourceTree = "<group>";
+		};
+		F010AC611E8B648D00458EE9 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				F010AC621E8B648D00458EE9 /* common */,
+				F010AC631E8B648D00458EE9 /* main */,
+			);
+			path = classes;
+			sourceTree = "<group>";
+		};
+		F010AC621E8B648D00458EE9 /* common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		F010AC631E8B648D00458EE9 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				F010AC641E8B648D00458EE9 /* controller */,
+				F010AC651E8B648D00458EE9 /* model */,
+				F010AC661E8B648D00458EE9 /* view */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		F010AC641E8B648D00458EE9 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				F010AC671E8B64DE00458EE9 /* MainViewController.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		F010AC651E8B648D00458EE9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		F010AC661E8B648D00458EE9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F010AC691E8B7EFD00458EE9 /* StepperView.swift */,
+				F010AC6B1E8B802D00458EE9 /* StepperNode.swift */,
+				F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +194,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F010AC521E8B63D400458EE9 /* ViewController.swift in Sources */,
+				F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */,
+				F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */,
+				F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */,
+				F010AC681E8B64DE00458EE9 /* MainViewController.swift in Sources */,
 				F010AC501E8B63D400458EE9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
