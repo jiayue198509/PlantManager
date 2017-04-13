@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <stamp>201703241648</stamp>
+    <action name="播种流程">
+        <start name="开始播种">NS-BZ-HY0102-0001</start>
+        <step  name="扫描种植盘" mode="single">SB-ZP-......-....</step>
+        <end name="完成播种">NS-BZ-HY0102-0002</end>
+     </action>
+
+    <action name="浇水流程">
+        <start name="开始浇水">NS-JS-HY0102-0001</start>
+        <step  name="扫描种植盘或种植架" mode="choose">SB-ZP-......-....|SB-DJ-......-....</step>
+        <end name="完成浇水">NS-JS-HY0102-0002</end>
+    </action>
+
+    <action name="定植流程">
+        <start name="开始定植">NS-DZ-HY0102-0001</start>
+        <step  name="扫描种植架">SB-DJ-......-....</step>
+        <step  name="扫描种植盘" mode="mult">SB-ZP-......-....</step>
+        <end name="完成定植">NS-DZ-HY0102-0002</end>
+    </action>
+</root>
+

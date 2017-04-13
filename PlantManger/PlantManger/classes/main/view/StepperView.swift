@@ -8,23 +8,26 @@ import UIKit
     @IBInspectable var stepperColor: UIColor = UIColor(red: 0.200, green: 0.200, blue: 0.200, alpha: 1.000)
     @IBInspectable var stepperFillColor: UIColor = UIColor(red: 0.098, green: 0.655, blue: 0.510, alpha: 1.000)
 
-    @IBInspectable var stepperColorNull: UIColor = UIColor(red: 0.400, green: 0.400, blue: 0.400, alpha: 1.000)
+    @IBInspectable var stepperColorNull: UIColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000)
     @IBInspectable var stepperFillColorNull: UIColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000)
     
-    @IBInspectable var leftTextColor: UIColor = UIColor(red: 0.200, green: 0.200, blue: 0.200, alpha: 1.000)
-    @IBInspectable var rightTextColor: UIColor = UIColor(red: 0.200, green: 0.200, blue: 0.200, alpha: 1.000)
+    @IBInspectable var descTextColor: UIColor = UIColor(red: 0.200, green: 0.200, blue: 0.200, alpha: 1.000)
+    @IBInspectable var stepTextColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.000)
     
-    @IBInspectable var leftTextFont: UIFont = UIFont.systemFont(ofSize: UIFont.labelFontSize)
-    @IBInspectable var rightTextFont: UIFont = UIFont.systemFont(ofSize: UIFont.labelFontSize)
+    @IBInspectable var descTextFont: UIFont = UIFont.systemFont(ofSize: 13)
+    @IBInspectable var stepTextFont: UIFont = UIFont.systemFont(ofSize: 17)
     
-    @IBInspectable var nodeCircumference: Double = 47;
+    @IBInspectable var nodeCircumference: Double = 80;
     @IBInspectable var linkLength: Double = 40;
     @IBInspectable var linkThickness: Double = 5;
-    @IBInspectable var nodeStrokeWidth: Double = 5;
+    @IBInspectable var nodeStrokeWidth: Double = 1;
+    @IBInspectable var descLabelHeight: Double = 20;
     
     @IBInspectable var innerNodeOffset: Double = 11;
     
     @IBOutlet weak var stepperDataSource: NSObject?
+    
+    var rectOri:CGRect = CGRect.zero
     
     override func draw(_ rect: CGRect) {
         
@@ -41,178 +44,87 @@ import UIKit
         
         let nodeCount = dataSource.stepperNodeCount()
         
+        let width = (Double(nodeCount) * nodeCircumference) + Double(nodeCount - 1) * linkLength
+        let inset = (rect.width - CGFloat(width))/2
+
         for i in 0..<nodeCount {
             
-            let xOffset = Double(i) * (nodeCircumference + linkLength)
+            let xOffset = Double(inset) + Double(i) * (nodeCircumference + linkLength)
             
             let node = dataSource.stepperNodeAtIndex(i)
             
-            drawNode(node, x: CGFloat(xOffset), y: rect.origin.y, width: rect.width, height: rect.height, isLast: (i == (nodeCount - 1)))
+            drawHorizontalNode(node, x: CGFloat(xOffset), y: rect.origin.y, width: rect.width, height: rect.height, isLast: (i == (nodeCount - 1)))
         }
     }
     
     func drawDemoData(_ rect: CGRect) {
         let nodes: [StepperNode] = [
-            StepperNode(isSelected: true, leftText: "10:30pm", rightText: "One"),
-            StepperNode(isSelected: true, leftText: "10:40pm", rightText: "Two"),
-            StepperNode(isSelected: true, leftText: "11:00pm", rightText: "Three"),
-            StepperNode(isSelected: false, leftText: "11:30pm", rightText: "Four"),
-            StepperNode(isSelected: false, leftText: "12:30pm", rightText: "Five")
+            StepperNode(isSelected: true, stepText: "1", descText: "开始"),
+            StepperNode(isSelected: true, stepText: "2", descText: "打开阀门"),
+            StepperNode(isSelected: true, stepText: "3", descText: "浇水"),
+            StepperNode(isSelected: false, stepText: "4", descText: "关闭阀门"),
+            StepperNode(isSelected: false, stepText: "5", descText: "结束")
         ]
+        
+        let width = (Double(nodes.count) * nodeCircumference) + Double(nodes.count - 1) * linkLength
+        let inset = (rect.width - CGFloat(width))/2
+        
         
         for i in 0..<nodes.count {
             
-            let xOffset = Double(i) * (self.nodeCircumference + linkLength)
+            let xOffset = Double(inset) + Double(i) * (self.nodeCircumference + linkLength)
             
-            drawhorizontalNode(nodes[i], x: CGFloat(xOffset), y: rect.origin.y, width: rect.width, height: rect.height, isLast: (i == (nodes.count - 1)))
+            drawHorizontalNode(nodes[i], x: CGFloat(xOffset), y: rect.origin.y, width: rect.width, height: rect.height, isLast: (i == (nodes.count - 1)))
         }
     }
     
-    func drawNode(_ node: StepperNode, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, isLast: Bool) {
-        
-        let center: Double = Double(width) / 2.0;
-        
-        //// Node Drawing
-        
-        let nodeX = CGFloat(center - (nodeCircumference / 2))
-        let nodeY = y + CGFloat(linkThickness / 2.0)
-        
-        let nodePath = UIBezierPath(ovalIn: CGRect(x: nodeX, y: nodeY, width: CGFloat(nodeCircumference), height: CGFloat(nodeCircumference)))
-        UIColor.white.setFill()
-        nodePath.fill()
-        if(node.isSelected) {
-            stepperColor.setStroke()
-        }else{
-            stepperColorNull.setStroke()
-        }
-        nodePath.lineWidth = CGFloat(linkThickness)
-        nodePath.stroke()
-        
-        if(node.isSelected) {
-            //// InnerNode Drawing
-            let innerNodeX = CGFloat(center - ((nodeCircumference - innerNodeOffset) / 2))
-            let innerNodeY = nodeY + CGFloat(innerNodeOffset / 2)
-            let innerWidth = CGFloat(nodeCircumference - innerNodeOffset)
-            
-            let innerNodePath = UIBezierPath(ovalIn: CGRect(x: innerNodeX, y: innerNodeY, width: innerWidth, height: innerWidth))
-            stepperFillColor.setFill()
-            innerNodePath.fill()
-        }
-        
-        if(node.leftText != "") {
-            
-            let leftTextWidth = CGFloat(center - nodeCircumference)
-            
-            let leftLabelRect = CGRect(x: 0, y: nodeY, width: leftTextWidth, height: CGFloat(nodeCircumference))
-            let leftLabelTextContent = NSString(string: node.leftText)
-            let leftLabelStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            leftLabelStyle.alignment = NSTextAlignment.right
-            
-            let leftLabelFontAttributes = [NSFontAttributeName: leftTextFont, NSForegroundColorAttributeName: leftTextColor, NSParagraphStyleAttributeName: leftLabelStyle] as [String : Any]
-            
-            let leftLabelTextHeight: CGFloat = leftLabelTextContent.boundingRect(with: CGSize(width: leftLabelRect.width, height: CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: leftLabelFontAttributes, context: nil).size.height
-            context?.saveGState()
-            context?.clip(to: leftLabelRect);
-            leftLabelTextContent.draw(in: CGRect(x: leftLabelRect.minX, y: leftLabelRect.minY + (leftLabelRect.height - leftLabelTextHeight) / 2, width: leftLabelRect.width, height: leftLabelTextHeight), withAttributes: leftLabelFontAttributes)
-            context?.restoreGState()
-        }
-        
-        if(node.rightText != "") {
-            
-            let rightTextX = CGFloat(center + nodeCircumference)
-            let rightTextWidth = width - rightTextX
-            
-            let rightLabelRect = CGRect(x: rightTextX, y: nodeY, width: rightTextWidth, height: CGFloat(nodeCircumference))
-            let rightLabelTextContent = NSString(string: node.rightText)
-            let rightLabelStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            rightLabelStyle.alignment = NSTextAlignment.left
-            
-            let rightLabelFontAttributes = [NSFontAttributeName: rightTextFont, NSForegroundColorAttributeName: rightTextColor, NSParagraphStyleAttributeName: rightLabelStyle] as [String : Any]
-            
-            let rightLabelTextHeight: CGFloat = rightLabelTextContent.boundingRect(with: CGSize(width: rightLabelRect.width, height: CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: rightLabelFontAttributes, context: nil).size.height
-            context?.saveGState()
-            context?.clip(to: rightLabelRect);
-            
-            rightLabelTextContent.draw(in: CGRect(x: rightLabelRect.minX, y: rightLabelRect.minY + (rightLabelRect.height - rightLabelTextHeight) / 2, width: rightLabelRect.width, height: rightLabelTextHeight), withAttributes: rightLabelFontAttributes)
-            context?.restoreGState()
-        }
-        
-        
-        if(isLast) {
-            return
-        }
-        
-        //// Link Drawing
-        let linkX = CGFloat(center - (linkThickness / 2))
-        let linkY = nodeY + CGFloat(nodeCircumference)
-        
-        let linkPath = UIBezierPath(rect: CGRect(x: linkX, y: linkY, width: CGFloat(linkThickness), height: CGFloat(linkLength)))
-        stepperColor.setFill()
-        linkPath.fill()
-        
-    }
-    
-    func drawhorizontalNode(_ node: StepperNode, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, isLast: Bool) {
+    func drawHorizontalNode(_ node: StepperNode, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, isLast: Bool) {
         let center: Double = Double(height) / 2.0;
         
-        //// Node Drawing
-        
         let nodeY = CGFloat(center - (nodeCircumference / 2))
-        let nodeX = x + CGFloat(linkThickness / 2.0)
+        let nodeX = x + CGFloat(nodeStrokeWidth / 2.0)
         
         let nodePath = UIBezierPath(ovalIn: CGRect(x: nodeX, y: nodeY, width: CGFloat(nodeCircumference), height: CGFloat(nodeCircumference)))
-        UIColor.white.setFill()
-        nodePath.fill()
+        
         if(node.isSelected) {
+            UIColor.init(red: 36/255, green: 199/255, blue: 136/255, alpha: 1).setFill()
+            nodePath.fill()
             stepperColor.setStroke()
         }else{
+            UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000).setFill()
+            nodePath.fill()
             stepperColorNull.setStroke()
         }
-        nodePath.lineWidth = CGFloat(linkThickness)
+        nodePath.lineWidth = CGFloat(nodeStrokeWidth)
         nodePath.stroke()
         
-        let innerNodeX = CGFloat(center - ((nodeCircumference - innerNodeOffset) / 2))
-        let innerNodeY = nodeY + CGFloat(innerNodeOffset / 2)
-        let innerWidth = CGFloat(nodeCircumference - innerNodeOffset)
-        
-        let innerNodePath = UIBezierPath(ovalIn: CGRect(x: innerNodeX, y: innerNodeY, width: innerWidth, height: innerWidth))
-        if(node.isSelected) {
-            stepperFillColor.setFill()
+        if(node.stepText != "") {
             
-        }else{
-            stepperFillColorNull.setFill()
+            let stepLabelRect = CGRect(x: nodeX, y: nodeY, width: CGFloat(nodeCircumference), height: CGFloat(nodeCircumference))
+            let stepLabelTextContent = NSString(string: node.stepText)
+            let stepLabelStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+            stepLabelStyle.alignment = NSTextAlignment.center
+            
+            let rightLabelFontAttributes = [NSFontAttributeName: stepTextFont, NSForegroundColorAttributeName: stepTextColor, NSParagraphStyleAttributeName: stepLabelStyle] as [String : Any]
+            
+            let rightLabelTextHeight: CGFloat = stepLabelTextContent.boundingRect(with: CGSize(width: stepLabelRect.width, height: CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: rightLabelFontAttributes, context: nil).size.height
+            context?.saveGState()
+            context?.clip(to: stepLabelRect);
+            
+            stepLabelTextContent.draw(in: CGRect(x: stepLabelRect.minX, y: stepLabelRect.minY + (stepLabelRect.height - rightLabelTextHeight) / 2, width: stepLabelRect.width, height: rightLabelTextHeight), withAttributes: rightLabelFontAttributes)
+            context?.restoreGState()
         }
-        innerNodePath.fill()
         
-//        if(node.leftText != "") {
-//            
-//            let leftTextWidth = CGFloat(center - nodeCircumference)
-//            
-//            let leftLabelRect = CGRect(x: 0, y: nodeY, width: leftTextWidth, height: CGFloat(nodeCircumference))
-//            let leftLabelTextContent = NSString(string: node.leftText)
-//            let leftLabelStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-//            leftLabelStyle.alignment = NSTextAlignment.right
-//            
-//            let leftLabelFontAttributes = [NSFontAttributeName: leftTextFont, NSForegroundColorAttributeName: leftTextColor, NSParagraphStyleAttributeName: leftLabelStyle] as [String : Any]
-//            
-//            let leftLabelTextHeight: CGFloat = leftLabelTextContent.boundingRect(with: CGSize(width: leftLabelRect.width, height: CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: leftLabelFontAttributes, context: nil).size.height
-//            context?.saveGState()
-//            context?.clip(to: leftLabelRect);
-//            leftLabelTextContent.draw(in: CGRect(x: leftLabelRect.minX, y: leftLabelRect.minY + (leftLabelRect.height - leftLabelTextHeight) / 2, width: leftLabelRect.width, height: leftLabelTextHeight), withAttributes: leftLabelFontAttributes)
-//            context?.restoreGState()
-//        }
-        
-        if(node.rightText != "") {
+        if(node.descText != "") {
+            let descTextY = CGFloat(center + nodeCircumference/2)
+            let descTextWidth = 70.0
             
-            let rightTextY = CGFloat(center + nodeCircumference)
-            let rightTextWidth = 60.0
-            
-            let rightLabelRect = CGRect(x: nodeX, y: rightTextY, width: CGFloat(rightTextWidth), height: CGFloat(nodeCircumference))
-            let rightLabelTextContent = NSString(string: node.rightText)
+            let rightLabelRect = CGRect(x: nodeX + CGFloat(nodeCircumference/2) - CGFloat(descTextWidth/2), y: descTextY, width: CGFloat(descTextWidth), height: CGFloat(descLabelHeight))
+            let rightLabelTextContent = NSString(string: node.descText)
             let rightLabelStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-            rightLabelStyle.alignment = NSTextAlignment.left
+            rightLabelStyle.alignment = NSTextAlignment.center
             
-            let rightLabelFontAttributes = [NSFontAttributeName: rightTextFont, NSForegroundColorAttributeName: rightTextColor, NSParagraphStyleAttributeName: rightLabelStyle] as [String : Any]
+            let rightLabelFontAttributes = [NSFontAttributeName: descTextFont, NSForegroundColorAttributeName: descTextColor, NSParagraphStyleAttributeName: rightLabelStyle] as [String : Any]
             
             let rightLabelTextHeight: CGFloat = rightLabelTextContent.boundingRect(with: CGSize(width: rightLabelRect.width, height: CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: rightLabelFontAttributes, context: nil).size.height
             context?.saveGState()
@@ -232,8 +144,21 @@ import UIKit
         let linkX = nodeX + CGFloat(nodeCircumference)
         
         let linkPath = UIBezierPath(rect: CGRect(x: linkX, y: linkY, width: CGFloat(linkLength), height: CGFloat(linkThickness)))
-        stepperColor.setFill()
-        linkPath.fill()
+        if(node.isSelected) {
+            stepperColor.setFill()
+            linkPath.fill()
+        }else{
+            stepperColorNull.setFill()
+            linkPath.fill()
+        }
+    }
+    
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        let views = self.subviews
+        for view in views {
+            view.removeFromSuperview()
+        }
     }
     
 }

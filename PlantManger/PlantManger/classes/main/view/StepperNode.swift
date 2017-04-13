@@ -11,13 +11,13 @@ import Foundation
 class StepperNode: NSObject {
     
     var isSelected: Bool = false
-    var leftText: String = ""
-    var rightText: String = ""
+    var stepText: String = ""
+    var descText: String = ""
     
-    init(isSelected: Bool, leftText: String, rightText: String) {
+    init(isSelected: Bool, stepText: String, descText: String) {
         self.isSelected = isSelected
-        self.leftText = leftText
-        self.rightText = rightText
+        self.stepText = stepText
+        self.descText = descText
     }
     
 }

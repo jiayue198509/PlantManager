@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82E982254F602C361EFFB75F /* Pods_PlantManger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D411527340B97C0F5E4BC57 /* Pods_PlantManger.framework */; };
 		F010AC501E8B63D400458EE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC4F1E8B63D400458EE9 /* AppDelegate.swift */; };
 		F010AC551E8B63D400458EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F010AC531E8B63D400458EE9 /* Main.storyboard */; };
 		F010AC571E8B63D400458EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F010AC561E8B63D400458EE9 /* Assets.xcassets */; };
@@ -15,9 +16,24 @@
 		F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC691E8B7EFD00458EE9 /* StepperView.swift */; };
 		F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6B1E8B802D00458EE9 /* StepperNode.swift */; };
 		F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */; };
+		F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A31E9F194B008D193B /* NetworkTools.swift */; };
+		F07F03A61E9F1952008D193B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A51E9F1952008D193B /* Reachability.swift */; };
+		F08DFB6F1E9B2E8100F7C9A1 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */; };
+		F08DFB711E9B2EF100F7C9A1 /* StateDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB701E9B2EF100F7C9A1 /* StateDataModel.swift */; };
+		F08DFB731E9B33F200F7C9A1 /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB721E9B33F200F7C9A1 /* BaseState.swift */; };
+		F091554B1E97754A00004E39 /* StepperStateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091554A1E97754A00004E39 /* StepperStateDelegate.swift */; };
+		F0A815B51E9CAA260016FFD0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A815B41E9CAA260016FFD0 /* Common.swift */; };
+		F0D55E141E9C81B90010784C /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D55E131E9C81B90010784C /* ActionModel.swift */; };
+		F0D55E161E9C82C60010784C /* StepModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D55E151E9C82C60010784C /* StepModel.swift */; };
+		F0FE78A21E9B71AF00EAD6C0 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FE78A11E9B71AF00EAD6C0 /* libxml2.2.tbd */; };
+		F0FE78A71E9B75C800EAD6C0 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FE78A61E9B75C800EAD6C0 /* GDataXMLNode.m */; };
+		F0FE78A91E9B762800EAD6C0 /* action.xml in Resources */ = {isa = PBXBuildFile; fileRef = F0FE78A81E9B762800EAD6C0 /* action.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		57CA5D90E0729E3F23B18C50 /* Pods-PlantManger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantManger.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlantManger/Pods-PlantManger.release.xcconfig"; sourceTree = "<group>"; };
+		7856A253278DADC2B137120B /* Pods-PlantManger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlantManger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlantManger/Pods-PlantManger.debug.xcconfig"; sourceTree = "<group>"; };
+		8D411527340B97C0F5E4BC57 /* Pods_PlantManger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlantManger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F010AC4C1E8B63D400458EE9 /* PlantManger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantManger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F010AC4F1E8B63D400458EE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F010AC541E8B63D400458EE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,6 +44,20 @@
 		F010AC691E8B7EFD00458EE9 /* StepperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
 		F010AC6B1E8B802D00458EE9 /* StepperNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperNode.swift; sourceTree = "<group>"; };
 		F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperDataSource.swift; sourceTree = "<group>"; };
+		F07F03A31E9F194B008D193B /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
+		F07F03A51E9F1952008D193B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
+		F08DFB701E9B2EF100F7C9A1 /* StateDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateDataModel.swift; sourceTree = "<group>"; };
+		F08DFB721E9B33F200F7C9A1 /* BaseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
+		F091554A1E97754A00004E39 /* StepperStateDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperStateDelegate.swift; sourceTree = "<group>"; };
+		F0A815B41E9CAA260016FFD0 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		F0D55E131E9C81B90010784C /* ActionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionModel.swift; sourceTree = "<group>"; };
+		F0D55E151E9C82C60010784C /* StepModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepModel.swift; sourceTree = "<group>"; };
+		F0FE78A11E9B71AF00EAD6C0 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		F0FE78A31E9B743100EAD6C0 /* PlantManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PlantManager-Bridging-Header.h"; path = "classes/PlantManager-Bridging-Header.h"; sourceTree = "<group>"; };
+		F0FE78A51E9B75C800EAD6C0 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		F0FE78A61E9B75C800EAD6C0 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		F0FE78A81E9B762800EAD6C0 /* action.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = action.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +65,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0FE78A21E9B71AF00EAD6C0 /* libxml2.2.tbd in Frameworks */,
+				82E982254F602C361EFFB75F /* Pods_PlantManger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		338000F94DA47D409609408F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7856A253278DADC2B137120B /* Pods-PlantManger.debug.xcconfig */,
+				57CA5D90E0729E3F23B18C50 /* Pods-PlantManger.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F010AC431E8B63D400458EE9 = {
 			isa = PBXGroup;
 			children = (
 				F010AC4E1E8B63D400458EE9 /* PlantManger */,
 				F010AC4D1E8B63D400458EE9 /* Products */,
+				F0FE78A01E9B71AF00EAD6C0 /* Frameworks */,
+				338000F94DA47D409609408F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +103,8 @@
 		F010AC4E1E8B63D400458EE9 /* PlantManger */ = {
 			isa = PBXGroup;
 			children = (
+				F0FE78A81E9B762800EAD6C0 /* action.xml */,
+				F0FE78A31E9B743100EAD6C0 /* PlantManager-Bridging-Header.h */,
 				F010AC611E8B648D00458EE9 /* classes */,
 				F010AC4F1E8B63D400458EE9 /* AppDelegate.swift */,
 				F010AC531E8B63D400458EE9 /* Main.storyboard */,
@@ -82,6 +127,16 @@
 		F010AC621E8B648D00458EE9 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F0FE78A41E9B75C800EAD6C0 /* XMLSupport */,
+				F091554A1E97754A00004E39 /* StepperStateDelegate.swift */,
+				F07F03A31E9F194B008D193B /* NetworkTools.swift */,
+				F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */,
+				F08DFB701E9B2EF100F7C9A1 /* StateDataModel.swift */,
+				F07F03A51E9F1952008D193B /* Reachability.swift */,
+				F08DFB721E9B33F200F7C9A1 /* BaseState.swift */,
+				F0D55E131E9C81B90010784C /* ActionModel.swift */,
+				F0D55E151E9C82C60010784C /* StepModel.swift */,
+				F0A815B41E9CAA260016FFD0 /* Common.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -121,6 +176,24 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		F0FE78A01E9B71AF00EAD6C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0FE78A11E9B71AF00EAD6C0 /* libxml2.2.tbd */,
+				8D411527340B97C0F5E4BC57 /* Pods_PlantManger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0FE78A41E9B75C800EAD6C0 /* XMLSupport */ = {
+			isa = PBXGroup;
+			children = (
+				F0FE78A51E9B75C800EAD6C0 /* GDataXMLNode.h */,
+				F0FE78A61E9B75C800EAD6C0 /* GDataXMLNode.m */,
+			);
+			path = XMLSupport;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,9 +201,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F010AC5E1E8B63D400458EE9 /* Build configuration list for PBXNativeTarget "PlantManger" */;
 			buildPhases = (
+				9C6B36BB60B0ECDB8B69E64A /* [CP] Check Pods Manifest.lock */,
 				F010AC481E8B63D400458EE9 /* Sources */,
 				F010AC491E8B63D400458EE9 /* Frameworks */,
 				F010AC4A1E8B63D400458EE9 /* Resources */,
+				F96A718FF4A9F80788C35F7D /* [CP] Embed Pods Frameworks */,
+				57918BE6A7CBC0A48A29290B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -184,20 +260,79 @@
 				F010AC5A1E8B63D400458EE9 /* LaunchScreen.storyboard in Resources */,
 				F010AC571E8B63D400458EE9 /* Assets.xcassets in Resources */,
 				F010AC551E8B63D400458EE9 /* Main.storyboard in Resources */,
+				F0FE78A91E9B762800EAD6C0 /* action.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57918BE6A7CBC0A48A29290B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlantManger/Pods-PlantManger-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C6B36BB60B0ECDB8B69E64A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F96A718FF4A9F80788C35F7D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlantManger/Pods-PlantManger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F010AC481E8B63D400458EE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */,
+				F091554B1E97754A00004E39 /* StepperStateDelegate.swift in Sources */,
 				F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */,
+				F0A815B51E9CAA260016FFD0 /* Common.swift in Sources */,
+				F0D55E141E9C81B90010784C /* ActionModel.swift in Sources */,
+				F08DFB731E9B33F200F7C9A1 /* BaseState.swift in Sources */,
 				F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */,
+				F08DFB711E9B2EF100F7C9A1 /* StateDataModel.swift in Sources */,
+				F07F03A61E9F1952008D193B /* Reachability.swift in Sources */,
 				F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */,
+				F0D55E161E9C82C60010784C /* StepModel.swift in Sources */,
 				F010AC681E8B64DE00458EE9 /* MainViewController.swift in Sources */,
+				F0FE78A71E9B75C800EAD6C0 /* GDataXMLNode.m in Sources */,
+				F08DFB6F1E9B2E8100F7C9A1 /* StateMachine.swift in Sources */,
 				F010AC501E8B63D400458EE9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,28 +454,36 @@
 		};
 		F010AC5F1E8B63D400458EE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7856A253278DADC2B137120B /* Pods-PlantManger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = X9JT4XXQPX;
+				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				INFOPLIST_FILE = PlantManger/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = laidale.PlantManger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PlantManger/classes/PlantManager-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		F010AC601E8B63D400458EE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57CA5D90E0729E3F23B18C50 /* Pods-PlantManger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DEVELOPMENT_TEAM = X9JT4XXQPX;
+				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				INFOPLIST_FILE = PlantManger/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = laidale.PlantManger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PlantManger/classes/PlantManager-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -364,6 +507,7 @@
 				F010AC601E8B63D400458EE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
