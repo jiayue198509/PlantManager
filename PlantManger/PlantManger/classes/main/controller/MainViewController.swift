@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Alamofire
+import MBProgressHUD
 
 let distanceToCenter: CGFloat = 30.0    // 扫描区域中心向上提升的距离
 let navigationBarHeight: CGFloat = 64.0 // 导航条高度
@@ -321,7 +322,7 @@ extension MainViewController{
                     guard let name = step.attribute(forName: "name").stringValue() else { return }
                     stepNode.name = name
                     
-                    let mode = startNode.attribute(forName: "mode")
+                    let mode = step.attribute(forName: "mode")
                     if(mode == nil) {
                         stepNode.mode = "single"
                     }else {
@@ -387,7 +388,15 @@ extension MainViewController: AVCaptureMetadataOutputObjectsDelegate {
             if(isScaning) {return}
             isScaning = true
             if(!UserDefaults.standard.bool(forKey: "isLogin")) {
-                login(userInfo: message!)
+                if(message?.hasPrefix("YG"))! {
+                    login(userInfo: message!)
+                }else {
+                    ToastHelper.showAllTextDialog(view: self.view, message: "请先扫描员工码登录")
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                        self.isScaning = false
+                    })
+                    
+                }
                 return
             }
             
@@ -395,6 +404,11 @@ extension MainViewController: AVCaptureMetadataOutputObjectsDelegate {
                 if(stateMachine == nil) {
                     startStateMachine(messageStr: messageStr)
                 } else {
+                    let flag = checkData(barcode: messageStr)
+                    if(!flag) {
+                        isScaning = false
+                        return
+                    }
                     let nextNum = stateMachine?.nextState(barcodeValue: messageStr)
                     if(nextNum != -1){
                         self.nodes[nextNum!].isSelected = true
@@ -422,10 +436,28 @@ extension MainViewController {
         for action in actions {
             if (messageStr == action.startValue) {
                 stateMachine = StateMachine(action: action)
+                stateMachine?.stateDataModel.startCmd = messageStr
                 setupStepperView(action: action)
                 return
             }
         }
+    }
+    
+    func checkData(barcode:String) -> Bool{
+        if(stateMachine != nil){
+            if(barcode == stateMachine?.stateDataModel.startCmd) {
+                return false
+            }else if (barcode == stateMachine?.stateDataModel.finishCmd) {
+                return false
+            }
+            
+            for item in (stateMachine?.stateDataModel.dataArray)! {
+                if(item == barcode){
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     func releaseStateMachine() {
@@ -454,19 +486,19 @@ extension MainViewController {
     func setupStepperView(action:ActionModel) {
         nodes.removeAll()
         var stepCount = 1
-        let startNode = StepperNode(isSelected: true, stepText: "\(stepCount)", descText: action.startName)
+        let startNode = StepperNode(isSelected: true, stepText: "\(stepCount)", descText: action.startName, mode:"single")
         nodes.append(startNode)
         
         if(action.stepModel.count > 0){
             let count = (action.stepModel.count)
             for i in 0..<count {
                 stepCount = stepCount + 1
-                let node = StepperNode(isSelected: false, stepText: "\(stepCount)", descText: (action.stepModel[i].name))
+                let node = StepperNode(isSelected: false, stepText: "\(stepCount)", descText: (action.stepModel[i].name), mode:action.stepModel[i].mode)
                 nodes.append(node)
             }
         }
         stepCount = stepCount + 1
-        let endNode = StepperNode(isSelected: false, stepText: "\(stepCount)", descText: action.endName)
+        let endNode = StepperNode(isSelected: false, stepText: "\(stepCount)", descText: action.endName, mode:"single")
         nodes.append(endNode)
         stepperView = initStepView()
         self.view.addSubview(stepperView!)
@@ -502,6 +534,7 @@ extension MainViewController {
     }
     
     fileprivate func postData() {
+        let dss = stateMachine?.stateDataModel
         
     }
 }

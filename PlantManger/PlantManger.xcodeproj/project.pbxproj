@@ -16,6 +16,7 @@
 		F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC691E8B7EFD00458EE9 /* StepperView.swift */; };
 		F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6B1E8B802D00458EE9 /* StepperNode.swift */; };
 		F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */; };
+		F0456D261E9F78F800753A35 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0456D251E9F78F800753A35 /* ToastHelper.swift */; };
 		F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A31E9F194B008D193B /* NetworkTools.swift */; };
 		F07F03A61E9F1952008D193B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A51E9F1952008D193B /* Reachability.swift */; };
 		F08DFB6F1E9B2E8100F7C9A1 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */; };
@@ -44,6 +45,7 @@
 		F010AC691E8B7EFD00458EE9 /* StepperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
 		F010AC6B1E8B802D00458EE9 /* StepperNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperNode.swift; sourceTree = "<group>"; };
 		F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperDataSource.swift; sourceTree = "<group>"; };
+		F0456D251E9F78F800753A35 /* ToastHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
 		F07F03A31E9F194B008D193B /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		F07F03A51E9F1952008D193B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				F0D55E131E9C81B90010784C /* ActionModel.swift */,
 				F0D55E151E9C82C60010784C /* StepModel.swift */,
 				F0A815B41E9CAA260016FFD0 /* Common.swift */,
+				F0456D251E9F78F800753A35 /* ToastHelper.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				F0D55E141E9C81B90010784C /* ActionModel.swift in Sources */,
 				F08DFB731E9B33F200F7C9A1 /* BaseState.swift in Sources */,
 				F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */,
+				F0456D261E9F78F800753A35 /* ToastHelper.swift in Sources */,
 				F08DFB711E9B2EF100F7C9A1 /* StateDataModel.swift in Sources */,
 				F07F03A61E9F1952008D193B /* Reachability.swift in Sources */,
 				F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */,

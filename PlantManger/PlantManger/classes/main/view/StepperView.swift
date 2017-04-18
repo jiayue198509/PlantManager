@@ -7,6 +7,8 @@ import UIKit
     //// Color Declarations
     @IBInspectable var stepperColor: UIColor = UIColor(red: 0.200, green: 0.200, blue: 0.200, alpha: 1.000)
     @IBInspectable var stepperFillColor: UIColor = UIColor(red: 0.098, green: 0.655, blue: 0.510, alpha: 1.000)
+    
+    @IBInspectable var stepperLinkColor: UIColor = UIColor(red: 220/255, green: 155/255, blue: 110/255, alpha: 1.000)
 
     @IBInspectable var stepperColorNull: UIColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000)
     @IBInspectable var stepperFillColorNull: UIColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000)
@@ -59,11 +61,11 @@ import UIKit
     
     func drawDemoData(_ rect: CGRect) {
         let nodes: [StepperNode] = [
-            StepperNode(isSelected: true, stepText: "1", descText: "开始"),
-            StepperNode(isSelected: true, stepText: "2", descText: "打开阀门"),
-            StepperNode(isSelected: true, stepText: "3", descText: "浇水"),
-            StepperNode(isSelected: false, stepText: "4", descText: "关闭阀门"),
-            StepperNode(isSelected: false, stepText: "5", descText: "结束")
+            StepperNode(isSelected: true, stepText: "1", descText: "开始",mode:"single"),
+            StepperNode(isSelected: true, stepText: "2", descText: "打开阀门",mode:"single"),
+            StepperNode(isSelected: true, stepText: "3", descText: "浇水",mode:"single"),
+            StepperNode(isSelected: false, stepText: "4", descText: "关闭阀门",mode:"single"),
+            StepperNode(isSelected: false, stepText: "5", descText: "结束",mode:"single")
         ]
         
         let width = (Double(nodes.count) * nodeCircumference) + Double(nodes.count - 1) * linkLength
@@ -86,7 +88,11 @@ import UIKit
         
         let nodePath = UIBezierPath(ovalIn: CGRect(x: nodeX, y: nodeY, width: CGFloat(nodeCircumference), height: CGFloat(nodeCircumference)))
         
-        if(node.isSelected) {
+        if(node.isSelected && node.mode == "mult") {
+            UIColor.init(red: 220/255, green: 155/255, blue: 110/255, alpha: 1).setFill()
+            nodePath.fill()
+            stepperColor.setStroke()
+        }else if (node.isSelected && node.mode != "mult"){
             UIColor.init(red: 36/255, green: 199/255, blue: 136/255, alpha: 1).setFill()
             nodePath.fill()
             stepperColor.setStroke()
@@ -144,7 +150,10 @@ import UIKit
         let linkX = nodeX + CGFloat(nodeCircumference)
         
         let linkPath = UIBezierPath(rect: CGRect(x: linkX, y: linkY, width: CGFloat(linkLength), height: CGFloat(linkThickness)))
-        if(node.isSelected) {
+        if(node.isSelected && node.mode == "mult") {
+            stepperLinkColor.setFill()
+            linkPath.fill()
+        }else if node.isSelected && node.mode != "mult"{
             stepperColor.setFill()
             linkPath.fill()
         }else{
