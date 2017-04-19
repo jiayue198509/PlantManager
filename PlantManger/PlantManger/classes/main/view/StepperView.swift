@@ -13,13 +13,18 @@ import UIKit
     @IBInspectable var stepperColorNull: UIColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000)
     @IBInspectable var stepperFillColorNull: UIColor = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.000)
     
+    @IBInspectable var multNodeTintColor: UIColor = UIColor(red: 218/255, green: 65/255, blue: 68/255, alpha: 1.000)
+    
     @IBInspectable var descTextColor: UIColor = UIColor(red: 0.200, green: 0.200, blue: 0.200, alpha: 1.000)
     @IBInspectable var stepTextColor: UIColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.000)
     
     @IBInspectable var descTextFont: UIFont = UIFont.systemFont(ofSize: 13)
     @IBInspectable var stepTextFont: UIFont = UIFont.systemFont(ofSize: 17)
     
+    @IBInspectable var multTintTextFont: UIFont = UIFont.systemFont(ofSize: 11)
+    
     @IBInspectable var nodeCircumference: Double = 80;
+    @IBInspectable var multNodeCircumference: Double = 15;
     @IBInspectable var linkLength: Double = 40;
     @IBInspectable var linkThickness: Double = 5;
     @IBInspectable var nodeStrokeWidth: Double = 1;
@@ -92,6 +97,7 @@ import UIKit
             UIColor.init(red: 220/255, green: 155/255, blue: 110/255, alpha: 1).setFill()
             nodePath.fill()
             stepperColor.setStroke()
+            
         }else if (node.isSelected && node.mode != "mult"){
             UIColor.init(red: 36/255, green: 199/255, blue: 136/255, alpha: 1).setFill()
             nodePath.fill()
@@ -159,6 +165,29 @@ import UIKit
         }else{
             stepperColorNull.setFill()
             linkPath.fill()
+        }
+        
+        if(node.isSelected && node.mode == "mult") {
+            let multPath = UIBezierPath(ovalIn: CGRect(x: nodeX + CGFloat(nodeCircumference/2 + multNodeCircumference/2), y: nodeY, width: CGFloat(multNodeCircumference), height: CGFloat(multNodeCircumference)))
+            multNodeTintColor.setFill()
+            multPath.fill()
+            
+            if(node.multDescText != "") {
+                
+                let multTintLabelRect = CGRect(x: nodeX + CGFloat(nodeCircumference/2 + multNodeCircumference/2), y: nodeY, width: CGFloat(multNodeCircumference), height: CGFloat(multNodeCircumference))
+                let rightLabelTextContent = NSString(string: node.multDescText)
+                let rightLabelStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+                rightLabelStyle.alignment = NSTextAlignment.center
+                
+                let rightLabelFontAttributes = [NSFontAttributeName: multTintTextFont, NSForegroundColorAttributeName: descTextColor, NSParagraphStyleAttributeName: rightLabelStyle] as [String : Any]
+                
+                let rightLabelTextHeight: CGFloat = rightLabelTextContent.boundingRect(with: CGSize(width: multTintLabelRect.width, height: CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: rightLabelFontAttributes, context: nil).size.height
+                context?.saveGState()
+                context?.clip(to: multTintLabelRect);
+                
+                rightLabelTextContent.draw(in: CGRect(x: multTintLabelRect.minX, y: multTintLabelRect.minY + (multTintLabelRect.height - rightLabelTextHeight) / 2, width: multTintLabelRect.width, height: rightLabelTextHeight), withAttributes: rightLabelFontAttributes)
+                context?.restoreGState()
+            }
         }
     }
     

@@ -16,6 +16,7 @@
 		F010AC6A1E8B7EFD00458EE9 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC691E8B7EFD00458EE9 /* StepperView.swift */; };
 		F010AC6C1E8B802D00458EE9 /* StepperNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6B1E8B802D00458EE9 /* StepperNode.swift */; };
 		F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */; };
+		F03682AA1EA7145500B08030 /* TintModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03682A91EA7145500B08030 /* TintModel.swift */; };
 		F0456D261E9F78F800753A35 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0456D251E9F78F800753A35 /* ToastHelper.swift */; };
 		F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A31E9F194B008D193B /* NetworkTools.swift */; };
 		F07F03A61E9F1952008D193B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A51E9F1952008D193B /* Reachability.swift */; };
@@ -45,6 +46,7 @@
 		F010AC691E8B7EFD00458EE9 /* StepperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
 		F010AC6B1E8B802D00458EE9 /* StepperNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperNode.swift; sourceTree = "<group>"; };
 		F010AC6D1E8B804A00458EE9 /* StepperDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperDataSource.swift; sourceTree = "<group>"; };
+		F03682A91EA7145500B08030 /* TintModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintModel.swift; sourceTree = "<group>"; };
 		F0456D251E9F78F800753A35 /* ToastHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
 		F07F03A31E9F194B008D193B /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		F07F03A51E9F1952008D193B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				F0D55E151E9C82C60010784C /* StepModel.swift */,
 				F0A815B41E9CAA260016FFD0 /* Common.swift */,
 				F0456D251E9F78F800753A35 /* ToastHelper.swift */,
+				F03682A91EA7145500B08030 /* TintModel.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03682AA1EA7145500B08030 /* TintModel.swift in Sources */,
 				F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */,
 				F091554B1E97754A00004E39 /* StepperStateDelegate.swift in Sources */,
 				F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */,

@@ -11,6 +11,6 @@ import Foundation
 class StateDataModel {
     var startCmd:String = ""
     var finishCmd:String = ""
-    var dataArray:Array<String> = []
+    var dataArray:Array<TintModel> = []
     
 }

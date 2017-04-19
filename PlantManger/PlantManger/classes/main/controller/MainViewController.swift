@@ -275,6 +275,8 @@ class MainViewController: UIViewController, UIAlertViewDelegate, UINavigationCon
         self.view.backgroundColor = UIColor.white
         self.setupQRCode()
         
+        checkUser()
+        
         if(UserDefaults.standard.bool(forKey: "isLogin")) {
            (self.navigationBar?.viewWithTag(kNavTitleTag) as! UILabel).text = UserDefaults.standard.string(forKey: "name")
             (self.navigationBar?.viewWithTag(kNavLeftBtnTag) as! UIButton).isSelected = true
@@ -359,6 +361,8 @@ extension MainViewController {
             // 2.根据data该key,获取数组
             guard let rtncode = resultDict["rtn_code"] as? NSString else { return }
             if rtncode == "0" {
+                let date = NSDate()
+                let timeInterval = date.timeIntervalSince1970 * 1000
                 guard let userName = resultDict["name"] as? String else { return }
                 UserDefaults.standard.set(userName, forKey:"name")
                 guard let uid = resultDict["uid"] as? String else { return }
@@ -366,6 +370,9 @@ extension MainViewController {
                 guard let tkt = resultDict["tkt"] as? String else { return }
                 UserDefaults.standard.set(tkt, forKey:"tkt")
                 UserDefaults.standard.set(true, forKey:"isLogin")
+
+                
+                UserDefaults.standard.set(timeInterval, forKey:"timeStamp")
                 
                 DispatchQueue.main.async(execute: { 
                        (self.navigationBar?.viewWithTag(kNavTitleTag) as! UILabel).text = userName
@@ -409,9 +416,19 @@ extension MainViewController: AVCaptureMetadataOutputObjectsDelegate {
                         isScaning = false
                         return
                     }
-                    let nextNum = stateMachine?.nextState(barcodeValue: messageStr)
+                    var nextNum = stateMachine?.nextState(barcodeValue: messageStr)
                     if(nextNum != -1){
-                        self.nodes[nextNum!].isSelected = true
+                        if(nextNum! >= self.nodes.count - 1) {
+                            nextNum = nextNum! - 1
+                        }
+                        self.nodes[nextNum!+1].isSelected = true
+                        
+                        var i = 1
+                        for item in (self.stateMachine?.stateDataModel.dataArray)! {
+                            self.nodes[i].multDescText = "\(item.data.count)"
+                            i = i + 1
+                        }
+                        
                         stepperView?.setNeedsDisplay()
                     }
                     
@@ -452,9 +469,12 @@ extension MainViewController {
             }
             
             for item in (stateMachine?.stateDataModel.dataArray)! {
-                if(item == barcode){
-                    return false
+                for data in item.data {
+                    if(data == barcode){
+                        return false
+                    }
                 }
+
             }
         }
         return true
@@ -532,6 +552,20 @@ extension MainViewController {
             return true
         }
         return false
+    }
+    
+    func checkUser(){
+        let date = NSDate()
+        let timeInterval = date.timeIntervalSince1970 * 1000
+        
+        let timeLogin = UserDefaults.standard.double(forKey: "timeStamp")
+        if(timeLogin > 0) {
+            let dif = timeInterval - timeLogin
+            let hour = dif / (60 * 60 * 1000)
+            if(hour > kLoginInvalidTime) {
+                clearUserInfo()
+            }
+        }
     }
     
     fileprivate func postData() {

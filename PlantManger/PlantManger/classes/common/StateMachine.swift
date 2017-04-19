@@ -38,13 +38,23 @@ class StateMachine: NSObject {
         currentState = stateArray.first
     }
 
-    func addDataToModel(i: Int, barcode: String){
-        if(i == 0){
-            stateDataModel.startCmd = barcode
-        }else if i == stateArray.count-1 {
+    func addDataToModel(i: Int, barcode: String, mode:String){
+        if i == stateArray.count-1 {
             stateDataModel.finishCmd = barcode
         }else {
-            stateDataModel.dataArray.append(barcode)
+            var index = 0
+            for item in stateDataModel.dataArray {
+                if(item.index == i) {
+                    stateDataModel.dataArray[i-1].data.append(barcode)
+                    return
+                }
+                index = index + 1
+            }
+            let tint = TintModel()
+            tint.mode = mode
+            tint.index = i
+            tint.data.append(barcode)
+            stateDataModel.dataArray.append(tint)
         }
     }
     
@@ -59,25 +69,38 @@ class StateMachine: NSObject {
                 let results = regular.matches(in: barcodeValue, options: .reportProgress , range: NSMakeRange(0, barcodeValue.characters.count))
                 
                 if(results.count > 0) {
-                    addDataToModel(i: i, barcode: barcodeValue)
                     currentState = stateArray[i]
-                    return i
+                    var mode = ""
+                    if(currentState?.mode == "mult"){
+                        mode = "mult"
+                    }else {
+                        mode = "single"
+                    }
+                    addDataToModel(i: i, barcode: barcodeValue, mode: mode)
+                    return i - 1
                 }
             } else if(currentState?.value == item.value && (currentState?.mode)! == "mult" && i<stateArray.count) {
                 print(stateArray[i].value + "---" + barcodeValue)
-                let regular = try! NSRegularExpression(pattern: (stateArray[i].value), options:.caseInsensitive)
+                let regular = try! NSRegularExpression(pattern: (stateArray[i - 1].value), options:.caseInsensitive)
                 let results = regular.matches(in: barcodeValue, options: .reportProgress , range: NSMakeRange(0, barcodeValue.characters.count))
                 if(results.count > 0) {
-                    addDataToModel(i: i, barcode: barcodeValue)
+                    addDataToModel(i: i-1, barcode: barcodeValue, mode: "mult")
+                    return i - 1
                 }
-                
                 
                 let regularNext = try! NSRegularExpression(pattern: (stateArray[i].value), options:.caseInsensitive)
                 let resultsNext = regularNext.matches(in: barcodeValue, options: .reportProgress , range: NSMakeRange(0, barcodeValue.characters.count))
 
                 if(resultsNext.count > 0) {
-                    addDataToModel(i: i, barcode: barcodeValue)
                     currentState = stateArray[i]
+                    var mode = ""
+                    if(currentState?.mode == "mult"){
+                        mode = "mult"
+                    }else {
+                        mode = "single"
+                    }
+                    addDataToModel(i: i, barcode: barcodeValue, mode: mode)
+                    
                     return i
                 }
             }

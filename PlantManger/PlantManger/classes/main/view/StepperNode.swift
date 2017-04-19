@@ -14,12 +14,14 @@ class StepperNode: NSObject {
     var stepText: String = ""
     var descText: String = ""
     var mode:String = ""
+    var multDescText = ""
     
-    init(isSelected: Bool, stepText: String, descText: String, mode:String) {
+    init(isSelected: Bool, stepText: String, descText: String, mode:String, multDescText:String = "") {
         self.isSelected = isSelected
         self.stepText = stepText
         self.descText = descText
         self.mode = mode
+        self.multDescText = multDescText
     }
     
 }

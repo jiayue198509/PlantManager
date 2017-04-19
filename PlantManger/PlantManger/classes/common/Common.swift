@@ -11,6 +11,8 @@ import UIKit
 let kScreenW = UIScreen.main.bounds.width
 let kScreenH = UIScreen.main.bounds.height
 
+let kLoginInvalidTime:Double = 24
+
 let ServerUrl = "http://www.laidale.com/traceSystem"
 let LoginRequest = "/system/manager/loginbyqcode"
 
