@@ -12,4 +12,5 @@ class StepModel {
     var name:String = ""
     var mode:String = ""
     var value:String = ""
+    var responseValue:String = ""
 }

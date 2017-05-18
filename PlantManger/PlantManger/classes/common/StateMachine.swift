@@ -9,7 +9,11 @@
 import Foundation
 
 class StateMachine: NSObject {
-    var stateDataModel: StateDataModel = StateDataModel()
+    var stateDataModel: StateDataModel = StateDataModel() {
+        didSet {
+            UserDefaults.standard.set(stateDataModel, forKey: "data")
+        }
+    }
     var stateArray:Array<BaseState> = [BaseState]()
     var currentState:BaseState?
     init(action:ActionModel){
@@ -26,6 +30,7 @@ class StateMachine: NSObject {
                 let state:BaseState = BaseState()
                 state.value = (action.stepModel[i].value)
                 state.mode = (action.stepModel[i].mode)
+                state.responseName = (action.stepModel[i].responseValue)
                 stateArray.append(state)
             }
         }
@@ -54,11 +59,12 @@ class StateMachine: NSObject {
             tint.mode = mode
             tint.index = i
             tint.data.append(barcode)
+            tint.responseValue = (currentState?.responseName)!
             stateDataModel.dataArray.append(tint)
         }
     }
     
-    func nextState(barcodeValue:String) -> Int{
+    func nextState(barcodeValue:String) -> (Int,String){
         var i: Int = 0
         for item: BaseState in stateArray {
             i = i+1
@@ -77,7 +83,7 @@ class StateMachine: NSObject {
                         mode = "single"
                     }
                     addDataToModel(i: i, barcode: barcodeValue, mode: mode)
-                    return i - 1
+                    return (i - 1, "normal")
                 }
             } else if(currentState?.value == item.value && (currentState?.mode)! == "mult" && i<stateArray.count) {
                 print(stateArray[i].value + "---" + barcodeValue)
@@ -85,7 +91,7 @@ class StateMachine: NSObject {
                 let results = regular.matches(in: barcodeValue, options: .reportProgress , range: NSMakeRange(0, barcodeValue.characters.count))
                 if(results.count > 0) {
                     addDataToModel(i: i-1, barcode: barcodeValue, mode: "mult")
-                    return i - 1
+                    return (i - 1, "mult")
                 }
                 
                 let regularNext = try! NSRegularExpression(pattern: (stateArray[i].value), options:.caseInsensitive)
@@ -101,11 +107,11 @@ class StateMachine: NSObject {
                     }
                     addDataToModel(i: i, barcode: barcodeValue, mode: mode)
                     
-                    return i
+                    return (i, "normal")
                 }
             }
         }
-        return -1
+        return (-1, "error")
     }
     
 }

@@ -2,22 +2,31 @@
 <root>
     <stamp>201703241648</stamp>
     <action name="播种流程">
-        <start name="开始播种">NS-BZ-HY0102-0001</start>
-        <step  name="扫描种植盘" mode="single">SB-ZP-......-....</step>
+        <start name="开始播种" url="system/plant/addseed">NS-BZ-HY0102-0001</start>
+        <step  name="扫描计划" mode="single" response="qRStringCode">JH-..-.{2,9}-.{4,9}</step>
+        <step  name="扫描种植盘" mode="mult" response="seedDiskCode">SB-ZP-.{4,9}-.{4,9}</step>
         <end name="完成播种">NS-BZ-HY0102-0002</end>
      </action>
 
     <action name="浇水流程">
-        <start name="开始浇水">NS-JS-HY0102-0001</start>
-        <step  name="扫描种植盘或种植架" mode="choose">SB-ZP-......-....|SB-DJ-......-....</step>
+        <start name="开始浇水" url="system/plant/watering">NS-JS-HY0102-0001</start>
+        <step  name="扫描计划" mode="single">JH-..-.{2,9}-.{4,9}</step>
+        <step  name="扫描种植盘或种植架" mode="choose">SB-ZP-.{4,9}-.{4,9}|SB-DJ-.{4,9}-.{4,9}</step>
         <end name="完成浇水">NS-JS-HY0102-0002</end>
     </action>
 
     <action name="定植流程">
-        <start name="开始定植">NS-DZ-HY0102-0001</start>
-        <step  name="扫描种植架">SB-DJ-......-....</step>
-        <step  name="扫描种植盘" mode="mult">SB-ZP-......-....</step>
+        <start name="开始定植" url="system/plant/addGrowth">NS-DZ-HY0102-0001</start>
+        <step  name="扫描种植架" response="shelfLayerCode">SB-DJ-.{1,9}-.{1,9}</step>
+        <step  name="扫描种植盘" mode="mult" response="seedDiskCodes">SB-ZP-.{4,9}-.{4,9}</step>
         <end name="完成定植">NS-DZ-HY0102-0002</end>
+    </action>
+    
+    <action name="采收流程">
+        <start name="开始采收" url="system/plant/addGrowth">NS-CZ-HY0102-0001</start>
+        <step  name="扫描种植架" response="shelfLayerCode">SB-DJ-.{1,9}-.{1,9}</step>
+        <step  name="扫描采收框" mode="mult" response="harvestCodes">SB-CK-.{4,9}-.{4,9}</step>
+        <end name="完成采收">NS-CZ-HY0102-0002</end>
     </action>
 </root>
 

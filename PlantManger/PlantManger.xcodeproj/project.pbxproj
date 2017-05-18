@@ -20,6 +20,7 @@
 		F0456D261E9F78F800753A35 /* ToastHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0456D251E9F78F800753A35 /* ToastHelper.swift */; };
 		F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A31E9F194B008D193B /* NetworkTools.swift */; };
 		F07F03A61E9F1952008D193B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07F03A51E9F1952008D193B /* Reachability.swift */; };
+		F0875BA61EBAFEB300790252 /* RequestCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0875BA51EBAFEB300790252 /* RequestCode.swift */; };
 		F08DFB6F1E9B2E8100F7C9A1 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */; };
 		F08DFB711E9B2EF100F7C9A1 /* StateDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB701E9B2EF100F7C9A1 /* StateDataModel.swift */; };
 		F08DFB731E9B33F200F7C9A1 /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08DFB721E9B33F200F7C9A1 /* BaseState.swift */; };
@@ -50,6 +51,7 @@
 		F0456D251E9F78F800753A35 /* ToastHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastHelper.swift; sourceTree = "<group>"; };
 		F07F03A31E9F194B008D193B /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
 		F07F03A51E9F1952008D193B /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		F0875BA51EBAFEB300790252 /* RequestCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCode.swift; sourceTree = "<group>"; };
 		F08DFB6E1E9B2E8100F7C9A1 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		F08DFB701E9B2EF100F7C9A1 /* StateDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateDataModel.swift; sourceTree = "<group>"; };
 		F08DFB721E9B33F200F7C9A1 /* BaseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				F0A815B41E9CAA260016FFD0 /* Common.swift */,
 				F0456D251E9F78F800753A35 /* ToastHelper.swift */,
 				F03682A91EA7145500B08030 /* TintModel.swift */,
+				F0875BA51EBAFEB300790252 /* RequestCode.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				F07F03A41E9F194B008D193B /* NetworkTools.swift in Sources */,
 				F091554B1E97754A00004E39 /* StepperStateDelegate.swift in Sources */,
 				F010AC6E1E8B804A00458EE9 /* StepperDataSource.swift in Sources */,
+				F0875BA61EBAFEB300790252 /* RequestCode.swift in Sources */,
 				F0A815B51E9CAA260016FFD0 /* Common.swift in Sources */,
 				F0D55E141E9C81B90010784C /* ActionModel.swift in Sources */,
 				F08DFB731E9B33F200F7C9A1 /* BaseState.swift in Sources */,

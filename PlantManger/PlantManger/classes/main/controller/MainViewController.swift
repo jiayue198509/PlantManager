@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Alamofire
 import MBProgressHUD
+import SwiftyJSON
 
 let distanceToCenter: CGFloat = 30.0    // 扫描区域中心向上提升的距离
 let navigationBarHeight: CGFloat = 64.0 // 导航条高度
@@ -314,6 +315,7 @@ extension MainViewController{
             
             let startNode = action.elements(forName: "start")[0] as! GDataXMLElement
             ac.startName = startNode.attribute(forName: "name").stringValue()
+            ac.url = startNode.attribute(forName: "url").stringValue()
             ac.startValue = startNode.stringValue()
             
             if(action.childCount() > 2){
@@ -329,6 +331,12 @@ extension MainViewController{
                         stepNode.mode = "single"
                     }else {
                         stepNode.mode = mode!.stringValue()
+                    }
+                    let responeName = step.attribute(forName: "response")
+                    if(responeName == nil) {
+                        stepNode.responseValue = ""
+                    }else {
+                        stepNode.responseValue = responeName!.stringValue()
                     }
                     ac.stepModel.append(stepNode)
                     
@@ -402,7 +410,6 @@ extension MainViewController: AVCaptureMetadataOutputObjectsDelegate {
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
                         self.isScaning = false
                     })
-                    
                 }
                 return
             }
@@ -416,12 +423,23 @@ extension MainViewController: AVCaptureMetadataOutputObjectsDelegate {
                         isScaning = false
                         return
                     }
-                    var nextNum = stateMachine?.nextState(barcodeValue: messageStr)
+                    
+                    if(messageStr == TaskCancelCmd) {
+                        isScaning = false
+                        clearStepData()
+                        stepperView?.setNeedsDisplay()
+                        return
+                    }
+                    
+                    var (nextNum, code) = (stateMachine?.nextState(barcodeValue: messageStr))!
                     if(nextNum != -1){
-                        if(nextNum! >= self.nodes.count - 1) {
-                            nextNum = nextNum! - 1
+                        if(nextNum >= self.nodes.count - 1) {
+                            nextNum = nextNum - 1
                         }
-                        self.nodes[nextNum!+1].isSelected = true
+
+                        if(code != "mult"){
+                            self.nodes[nextNum+1].isSelected = true
+                        }
                         
                         var i = 1
                         for item in (self.stateMachine?.stateDataModel.dataArray)! {
@@ -452,8 +470,12 @@ extension MainViewController {
     fileprivate func startStateMachine(messageStr:String) {
         for action in actions {
             if (messageStr == action.startValue) {
+                let date = NSDate()
+                let timeInterval = date.timeIntervalSince1970 * 1000
                 stateMachine = StateMachine(action: action)
+                stateMachine?.stateDataModel.url = action.url
                 stateMachine?.stateDataModel.startCmd = messageStr
+                stateMachine?.stateDataModel.startTime = "\(timeInterval)"
                 setupStepperView(action: action)
                 return
             }
@@ -544,7 +566,7 @@ extension MainViewController {
     
     fileprivate func checkQcode(qcode:String) -> Bool{
         
-        let pattern = "(\\S{2}|\\d{2})-(\\S{2}|\\d{2})-(\\S{6}|\\d{6})-(\\Sd{1,6}|\\d{1,6})"
+        let pattern = "(\\S{2}|\\d{2})-(\\S{2}|\\d{2})-(\\S{1,9}|\\d{1,9})-(\\Sd{1,6}|\\d{1,6})"
         let regular = try! NSRegularExpression(pattern: pattern, options:.caseInsensitive)
         let results = regular.matches(in: qcode, options: .reportProgress , range: NSMakeRange(0, qcode.characters.count))
         
@@ -569,7 +591,28 @@ extension MainViewController {
     }
     
     fileprivate func postData() {
-        let dss = stateMachine?.stateDataModel
+        let url = stateMachine?.stateDataModel.url
+        var params = RequestCode.getParams(array: (stateMachine?.stateDataModel.dataArray)!)
+        params["startTime"] = stateMachine?.stateDataModel.startTime
+        
+        print(params)
+        
+        NetworkTools.requestData(.post, URLString:ServerUrl + url!, parameters: params ) {
+            (result) in
+            UserDefaults.standard.removeObject(forKey: "data")
+            let json = JSON(result)
+            
+            let rtnMsg = json["rtn_msg"].string
+            let rtnCode = json["rtn_code"].string
+            
+            if(rtnMsg == "OK") {
+                ToastHelper.showAllTextDialog(view: self.view, message: "操作成功")
+            }else {
+                ToastHelper.showAllTextDialog(view: self.view, message: rtnMsg! + "---(\(rtnCode!))")
+            }
+        }
+        
+       
         
     }
 }

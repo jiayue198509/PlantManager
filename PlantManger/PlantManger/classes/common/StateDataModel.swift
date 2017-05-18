@@ -9,8 +9,10 @@
 import Foundation
 
 class StateDataModel {
+    var url:String = ""
     var startCmd:String = ""
     var finishCmd:String = ""
     var dataArray:Array<TintModel> = []
+    var startTime:String = ""
     
 }

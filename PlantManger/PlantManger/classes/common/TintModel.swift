@@ -10,6 +10,7 @@ import Foundation
 
 class TintModel {
     var mode:String = ""
+    var responseValue:String = ""
     var data:Array<String> = []
     var index:Int = -1
 }

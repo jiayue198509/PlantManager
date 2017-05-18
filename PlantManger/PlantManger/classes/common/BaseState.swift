@@ -11,4 +11,5 @@ import Foundation
 class BaseState {
     var value:String = ""
     var mode:String = ""
+    var responseName:String = ""
 }

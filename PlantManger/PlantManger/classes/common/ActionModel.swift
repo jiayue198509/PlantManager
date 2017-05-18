@@ -12,6 +12,7 @@ class ActionModel {
     var name: String = ""
     var startName: String = ""
     var startValue: String = ""
+    var url:String = ""
     
     var stepModel:[StepModel] = [StepModel]()
     
